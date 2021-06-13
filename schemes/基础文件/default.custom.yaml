@@ -1,3 +1,16 @@
+# patch:
+#   "一級設定項/二級設定項/三級設定項": 新的設定值
+#   "另一個設定項": 新的設定值
+#   "再一個設定項": 新的設定值
+#   "含列表的設定項/@n": 列表第n個元素新的設定值，從0開始計數
+#   "含列表的設定項/@last": 列表最後一個元素新的設定值
+#   "含列表的設定項/@before 0": 在列表第一個元素之前插入新的設定值（不建議在補靪中使用）
+#   "含列表的設定項/@after last": 在列表最後一個元素之後插入新的設定值（不建議在補靪中使用）
+#   "含列表的設定項/@next": 在列表最後一個元素之後插入新的設定值（不建議在補靪中使用）
+#   "含列表的設定項/+": 與列表合併的設定值（必須爲列表）
+#   "含字典的設定項/+": 與字典合併的設定值（必須爲字典，注意YAML字典的無序性）
+
+
 customization:
   distribution_code_name: Weasel
   distribution_version: 0.14.3
@@ -5,7 +18,10 @@ customization:
   modified_time: "Sat Oct 31 18:18:48 2020"
   rime_version: 1.5.3
 patch:
+  "menu/page_size": 9
+
   schema_list:
+    - schema: terra_pinyin
     - {schema: clover}
     - {schema: wubi86_jidian}
     - {schema: wubi86_jidian_pinyin}

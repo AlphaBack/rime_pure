@@ -1,0 +1,51 @@
+# encoding: utf-8
+
+patch:
+  switches:
+  - name: ascii_mode
+    reset: 0
+    states: ["中文", "西文"]
+  - name: full_shape
+    states: ["半角", "全角"]
+  - name: simplification
+  # - name: zh_simp_s2t 
+    states: ["漢字", "汉字"]
+  - name: ascii_punct
+    states: ["。，", ". , "]
+  - name: symbol_support
+    reset: 0
+    states: ["无符", "有符"]
+  - name: emoji_suggestion
+    reset: 0
+    states: ["🈚️️︎", "🈶️️️"]
+#  switches/@0/reset: 1
+
+  # switches/@next:
+  #   name: emoji_suggestion
+  #   reset: 1
+  #   states: [ "🈚️️\uFE0E", "🈶️️\uFE0F" ]
+  'engine/filters/@before 0':
+    simplifier@emoji_suggestion
+  emoji_suggestion:
+    opencc_config: emoji.json
+    option_name: emoji_suggestion
+    tips: all
+
+  'punctuator/import_preset': symbols
+  'recognizer/patterns/punct': "^/([a-z]+|[0-9])$"
+
+  # switches/@after last:
+  #   name: symbol_support
+  #   reset: 1
+  #   states: [ "无符", "符" ]
+  'engine/filters/@before 1':
+    simplifier@symbol_support
+  symbol_support:
+    opencc_config: symbol.json
+    option_name: symbol_support
+    tips: all
+
+  # simplifier:
+  #   option_name: zh_simp_s2t
+  #   opencc_config: s2t.json
+
